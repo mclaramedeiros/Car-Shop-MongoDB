@@ -1,9 +1,10 @@
 import { z } from 'zod';
-import { IVehicle } from './IVehicle';
+import { zodVehicle } from './IVehicle';
 
-const zodCar = z.object({
+const zodCar = zodVehicle.extend({
   doorsQty: z.number().int().gte(2).lte(4),
   seatsQty: z.number().int().gte(2).lte(7),
 });
 
-export type ICar = z.infer<typeof zodCar> & IVehicle;
+type ICar = z.infer<typeof zodCar>;
+export { zodCar, ICar };
