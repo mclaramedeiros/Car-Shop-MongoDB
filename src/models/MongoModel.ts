@@ -20,6 +20,10 @@ abstract class MongoModel<T> implements IModel<T> {
     //   _id: created._id,
     // };
   }
+
+  public async read(): Promise<T[]> {
+    return this._model.find();
+  }
 }
 
 export default MongoModel;
