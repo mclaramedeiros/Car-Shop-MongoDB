@@ -1,18 +1,21 @@
 import { IModel } from '../interfaces/IModel';
-import { ICar } from '../interfaces/ICar';
+import { ICar, zodCar } from '../interfaces/ICar';
+import IService from '../interfaces/IService';
 
-class CarService implements IModel<ICar> {
-  private _frame: IModel<ICar>;
+class CarService implements IService<ICar> {
+  private _car: IModel<ICar>;
 
   constructor(model: IModel<ICar>) {
-    this._frame = model;
+    this._car = model;
   }
 
   public async create(obj: unknown): Promise<ICar> {
-    const parsed = FrameZodSchema.safeParse(obj);
+    const parsed = zodCar.safeParse(obj);
     if (!parsed.success) {
       throw parsed.error;
     }
-    return this._frame.create(obj);
+    return this._car.create(parsed.data);
   }
 }
+
+export default CarService;
