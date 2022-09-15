@@ -3,24 +3,22 @@ export enum ErrorTypes {
   InvalidMongoId = 'InvalidMongoId',
 }
 
-type ErrorResponseObject = { 
-  message: string;
-  httpStatus: number
+type ErrorResponseObject = {
+  error: string;
+  httpStatus: number;
 };
 
-// export type ErrorCatalog = {
-//   [key in ErrorTypes]: ErrorResponseObject
-// };
-
-export type ErrorCatalog = Record<ErrorTypes, ErrorResponseObject>;
+export type ErrorCatalog = {
+  [key in ErrorTypes]: ErrorResponseObject;
+};
 
 export const errorCatalog: ErrorCatalog = {
   EntityNotFound: {
-    message: 'Entity not found',
+    error: 'Object not found',
     httpStatus: 404,
   },
   InvalidMongoId: {
-    message: 'Id must be a 24 characters hexadecimal',
+    error: 'Id must have 24 hexadecimal characters',
     httpStatus: 400,
   },
 };
